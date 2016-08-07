@@ -64,6 +64,7 @@ module.exports = transformTools.makeRequireTransform(
 							}
 						})
 				} else {
+					// Couldn't resolve fileToRequire to a real file...
 					callback()
 				}
 			})
@@ -83,7 +84,10 @@ function softResolve (filePath, opts) {
 	return new Promise((resolve, reject) => {
 		nodeResolve(filePath, opts, (err, res) => {
 			if (err) {
-				reject(err)
+				// It doesn't look in env.NODE_MODULES so it fails
+				// when using 'gn'. Need to figure out which way to fix it.
+				// reject(err)
+				resolve(null)
 			} else {
 				resolve(res)
 			}
