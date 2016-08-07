@@ -9,6 +9,8 @@ const resolveLocalizedFile = require('./resolveLocalizedFile')
 
 const verbose = true
 
+let warnedOnce = false
+
 module.exports = transformTools.makeRequireTransform(
 	'localizify',
 	{
@@ -18,7 +20,10 @@ module.exports = transformTools.makeRequireTransform(
 	(args, opts, callback) => {
 		const globalOptions = opts.config._flags.localizify
 		if (!globalOptions) {
-			console.warn('localizify: no localizify options specified. Pass { localizify: ... } to browserify')
+			if (!warnedOnce) {
+				console.warn(`localizify ignored: Used in project '${ opts.file }' but no localizify options specified in browserify(). Pass { localizify: ... } to browserify`)
+				warnedOnce = true
+			}
 			callback()
 			return
 		}
