@@ -1,22 +1,5 @@
 const path = require('path')
-const fs = require('fs')
-
-function fileStat (filePath) {
-	return new Promise((resolve, reject) => {
-		fs.stat(filePath, (error, stats) => {
-			if (error) {
-				if (error.code === 'ENOENT') {
-					// File doesn't exist
-					resolve(null)
-				} else {
-					reject(error)
-				}
-			} else {
-				resolve(stats)
-			}
-		})
-	})
-}
+const fileStat = require('./fileStat')
 
 // Looks for existence of /a/path/to/file.{locale}.{ext}
 module.exports = function resolveLocalizedFile(filePath, locale) {
