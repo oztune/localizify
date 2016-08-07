@@ -18,7 +18,7 @@ module.exports = transformTools.makeRequireTransform(
 		jsFilesOnly: true
 	},
 	(args, opts, callback) => {
-		const globalOptions = opts.config._flags.localizify
+		const globalOptions = opts.config._flags && opts.config._flags.localizify
 		if (!globalOptions) {
 			if (!warnedOnce) {
 				console.warn(`localizify ignored: Used in project '${ opts.file }' but no localizify options specified in browserify(). Pass { localizify: ... } to browserify`)
