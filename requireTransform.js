@@ -7,7 +7,7 @@ const transformTools = require('browserify-transform-tools')
 
 const resolveLocalizedFile = require('./resolveLocalizedFile')
 
-const verbose = true
+const verbose = false
 
 let warnedOnce = false
 
